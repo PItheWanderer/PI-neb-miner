@@ -1,10 +1,11 @@
 # NEB GPU Miner for AMD
 
 A fast GPU miner for **NEB** (Neural Engine Byte) on **AMD Radeon** graphics cards, for **Windows** and **Linux
-(Ubuntu)**. It mines through Suprnova or AriaPool, or solo against your own NEB node.
+(Ubuntu)**. It mines on the NEB pools below, or solo against your own NEB node.
 
 - AMD RDNA1, RDNA2, RDNA3, RDNA3.5 and RDNA4 GPUs (RX 5000, 6000, 7000 and 9000 series, Ryzen APUs)
-- Pools: Suprnova (stratum) and AriaPool, detected automatically; solo mining with `neb-node`
+- Pools: Suprnova, InnovLab, K1Pool, AethelBlock, CryoPool (and AriaPool), with a ready start script for each; the pool
+  protocol is detected automatically
 - Every share is verified on the CPU before it is sent
 - Live table with the hashrate now, its average and the 8-hour average, shares, difficulty and pool statistics
 - Developer fee: 1 %
@@ -31,6 +32,27 @@ lower: the first TESS block after the miner starts, and the moments when a new m
 Only the RX 9070 XT has been measured so far. Other cards should scale roughly with their number of compute units and
 their clock.
 
+## Pools
+
+Each pool has its own start script in the package: `start-suprnova`, `start-innovlab`, `start-k1pool`,
+`start-aethelblock` and `start-cryopool` (`.bat` on Windows, `.sh` on Linux). All of them need only your `neb1...`
+address: no account, no registration.
+
+| Pool | Address | Website |
+|---|---|---|
+| Suprnova | `neb.suprnova.cc:7804` | [neb.suprnova.cc](https://neb.suprnova.cc) |
+| InnovLab | `neb.innovlab.cc:4370` | [innovlab.cc](https://innovlab.cc) |
+| K1Pool | `eu.neb.k1pool.com:3370` | [k1pool.com/pool/neb](https://k1pool.com/pool/neb) |
+| AethelBlock | `neb-pool.aethelblock.com:3084` | [aethelblock.com/neb](https://aethelblock.com/neb/) |
+| CryoPool | `neb.cryo-pool.com:5557` | [cryo-pool.com/neb](https://cryo-pool.com/neb) |
+
+Look up your address on the pool's website to see your hashrate, your shares and your balance. Each pool pays
+automatically once your balance reaches its minimum payout (see its website).
+
+> **Important:** the start scripts come with the **developer's address** already filled in, so that they work as an
+> example. Put **your own address** in the script you use, or you will be mining for the developer instead of for
+> yourself.
+
 ## Requirements
 
 **Windows 10 or 11 (64-bit)**
@@ -51,6 +73,7 @@ their clock.
 
 **Both**
 
+- An internet connection that reaches `neb.suprnova.cc`, whatever pool you mine on (see Developer fee).
 - The miner fills most of the free graphics memory with lookup tables (it leaves 2.5 GB free), so it is best not to use
   the GPU for anything else while mining. `--triples off` uses much less memory, at a lower TESS hashrate.
 
@@ -71,15 +94,13 @@ New to mining? Follow these steps; it takes about ten minutes.
    password when asked (twice), or just press Enter twice for no password. The window shows your address, which starts
    with `neb1`. Copy it somewhere. **Back up `wallet.txt`** (USB stick, cloud): whoever has this file, and its password,
    owns your coins, and if you lose it the coins are gone.
-5. **Put your address in the start script.** Right-click `start.bat`, choose **Edit** (or open it with Notepad), and
-   replace `neb1YOUR_ADDRESS_HERE` with your address. You can also change `rig1` to any name for this computer. Save
-   and close.
-6. **Start mining.** Double-click `start.bat`. For about a minute the miner tests itself on your GPU; then the live
+5. **Choose a pool and put your address in its script.** Pick one of the pools above, right-click its script (for
+   example `start-suprnova.bat`), choose **Edit** (or open it with Notepad), and replace the address after
+   `set ADDRESS=` with **your** address. You can also change `rig1` to any name for this computer. Save and close.
+6. **Start mining.** Double-click the script. For about a minute the miner tests itself on your GPU; then the live
    table appears. The first numbers to watch are the hashrate (MH/s) and the accepted shares (`A`): if `A` keeps going
    up, you are mining.
-7. **Check your earnings.** Open [neb.suprnova.cc](https://neb.suprnova.cc) and look up your address: you will see your
-   hashrate, your shares and your balance. Suprnova pays automatically to your address once your balance reaches the
-   pool's minimum payout (0.01 NEB at the time of writing).
+7. **Check your earnings.** Open the pool's website (see Pools) and look up your address.
 8. **Stop mining** with `q`, or by closing the window.
 
 ### Linux (Ubuntu)
@@ -91,13 +112,12 @@ New to mining? Follow these steps; it takes about ten minutes.
    unzip neb-miner-amd-linux.zip
    cd neb-miner-amd
    ./new-wallet.sh          # only if you have no neb1... address yet; back up wallet.txt
-   nano start.sh            # put your address in ADDRESS, save with Ctrl+O, quit with Ctrl+X
-   ./start.sh
+   nano start-suprnova.sh   # put YOUR address in ADDRESS, save with Ctrl+O, quit with Ctrl+X
+   ./start-suprnova.sh
    ```
 
-3. Check your earnings on [neb.suprnova.cc](https://neb.suprnova.cc) as in step 7 above.
-
-To mine on AriaPool instead of Suprnova, change the `POOL` line of the start script to `neb.ariabrain.com:3370`.
+   Replace `suprnova` with `innovlab`, `k1pool`, `aethelblock` or `cryopool` to mine on another pool.
+3. Check your earnings on the pool's website.
 
 ## Command line
 
@@ -107,12 +127,8 @@ Mining through a pool:
 neb-miner-gpu --pool HOST:PORT --user NEB_ADDRESS --worker NAME --dataset neb-datasets.bin --gpu-kernel pairs
 ```
 
-Always pass `--gpu-kernel pairs` and `--dataset neb-datasets.bin` (the file that comes with the miner).
-
-| Pool | Address |
-|---|---|
-| Suprnova | `neb.suprnova.cc:7804` |
-| AriaPool | `neb.ariabrain.com:3370` |
+Always pass `--gpu-kernel pairs` and `--dataset neb-datasets.bin` (the file that comes with the miner). Any pool of the
+table above works, and also AriaPool (`neb.ariabrain.com:3370`).
 
 | Option | What it does |
 |---|---|
@@ -131,12 +147,14 @@ Press `q` in the live table to quit.
 
 ## Developer fee
 
-The miner gives **1 %** of its blocks to the developer: in every 200 blocks, one Kepler block and one TESS block are
-mined for the developer's address on Suprnova, at random positions. During those two blocks the table shows
-`dev fee` next to the job; the rest of the time every share is yours. With `--fee-first` the miner mines the two fee
-blocks right after it starts and then mines the rest of the 200 blocks for you.
+The miner gives **1 %** of its blocks to the developer, whatever pool you mine on: in every 200 blocks, one Kepler
+block and one TESS block are mined for the developer's address on Suprnova, at random positions. During those two
+blocks the table shows `dev fee` next to the job; the rest of the time every share is yours. With `--fee-first` the
+miner mines the two fee blocks right after it starts and then mines the rest of the 200 blocks for you.
 
-If Suprnova cannot be reached, the miner keeps mining for you and takes the fee block later.
+The miner keeps a connection to Suprnova open for the fee. **If it cannot connect to Suprnova twice in a row, the
+miner stops** with a message: check your internet connection and that `neb.suprnova.cc` is not blocked, then start it
+again.
 
 ## Troubleshooting
 
@@ -145,6 +163,8 @@ If Suprnova cannot be reached, the miner keeps mining for you and takes the fee 
 - **"amdhip64_7.dll was not found" (Windows).** Update the AMD driver.
 - **"no CUDA device found" / no GPU (Linux).** Check `rocminfo`, and that your user is in the `render` and `video`
   groups.
+- **"The developer fee pool could not be reached twice in a row".** The miner could not connect to `neb.suprnova.cc`
+  (see Developer fee).
 - **The pool rejects the address.** The miner checks the address before it connects; copy it again from your wallet.
 - **Out of memory, or the desktop becomes slow.** Close other programs that use the GPU, or add `--triples off`.
 
