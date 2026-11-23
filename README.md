@@ -17,13 +17,13 @@ and 7660–7681):
 
 | Block type | Average | Range |
 |---|---|---|
-| Kepler (18 models) | **169 MH/s** | 121 – 285 MH/s |
-| TESS (16 models) | **1,169 MH/s** | 1,008 – 1,310 MH/s |
-| **Average over time** | **≈ 358 MH/s** | |
+| Kepler (18 models) | **180 MH/s** | 127 – 283 MH/s |
+| TESS (16 models) | **1,162 MH/s** | 992 – 1,308 MH/s |
+| **Average over time** | **≈ 366 MH/s** | |
 
 NEB blocks alternate between two models, Kepler and TESS, so the hashrate changes at every block. TESS blocks are found
-much faster than Kepler blocks (23 s against 98 s on average over the last 1,000 blocks of the chain), so a rig spends
-about 81 % of its time on Kepler blocks: weighted by time, the average is about 358 MH/s. The hashrate also changes
+much faster than Kepler blocks (23 s against 97 s on average over the last 1,000 blocks of the chain), so a rig spends
+about 81 % of its time on Kepler blocks: weighted by time, the average is about 366 MH/s. The hashrate also changes
 from one model to the next as the network trains them (the range above).
 
 These are the rates of the miner on a model it has fully prepared. Expect the pool's long-term average to be somewhat
@@ -90,10 +90,10 @@ New to mining? Follow these steps; it takes about ten minutes.
 3. **Extract it.** Right-click the zip, choose **Extract All...**, and pick a folder, for example
    `C:\neb-miner-amd`. Windows Defender and other antivirus programs often flag crypto miners as "potentially unwanted";
    if the miner disappears or is blocked, add an exclusion for its folder.
-4. **Create your wallet** (skip this if you already have a `neb1...` address). Double-click `new-wallet.bat`. Type a
-   password when asked (twice), or just press Enter twice for no password. The window shows your address, which starts
-   with `neb1`. Copy it somewhere. **Back up `wallet.txt`** (USB stick, cloud): whoever has this file, and its password,
-   owns your coins, and if you lose it the coins are gone.
+4. **Get a NEB address** (skip this if you already have one, starting with `neb1`). Create a wallet with the official
+   NEB wallet, `neb-wallet`, from the [official NEB release](https://github.com/SilasEigen/neb/releases): it prints your
+   `neb1...` address. Copy it somewhere, and **back up your wallet file** (USB stick, cloud): whoever has it, and its
+   password, owns your coins, and if you lose it the coins are gone.
 5. **Choose a pool and put your address in its script.** Pick one of the pools above, right-click its script (for
    example `start-suprnova.bat`), choose **Edit** (or open it with Notepad), and replace the address after
    `set ADDRESS=` with **your** address. You can also change `rig1` to any name for this computer. Save and close.
@@ -106,13 +106,13 @@ New to mining? Follow these steps; it takes about ten minutes.
 ### Linux (Ubuntu)
 
 1. Install the AMD driver with ROCm 7.2 (see Requirements above) and check that `rocminfo` lists your GPU.
-2. Download `neb-miner-amd-linux.zip` from **Releases**, then:
+2. Get a `neb1...` address with the official NEB wallet if you have none (step 4 above). Download
+   `neb-miner-amd-linux.zip` from **Releases**, then:
 
    ```bash
    unzip neb-miner-amd-linux.zip
    cd neb-miner-amd
-   ./new-wallet.sh          # only if you have no neb1... address yet; back up wallet.txt
-   nano start-suprnova.sh   # put YOUR address in ADDRESS, save with Ctrl+O, quit with Ctrl+X
+   nano start-suprnova.sh   # put YOUR neb1... address in ADDRESS, save with Ctrl+O, quit with Ctrl+X
    ./start-suprnova.sh
    ```
 
