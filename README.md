@@ -17,13 +17,13 @@ and 7660–7681):
 
 | Block type | Average | Range |
 |---|---|---|
-| Kepler (18 models) | **207 MH/s** | 144 – 328 MH/s |
-| TESS (16 models) | **1,311 MH/s** | 1,126 – 1,479 MH/s |
-| **Average over time** | **≈ 417 MH/s** | |
+| Kepler (18 models) | **209 MH/s** | 146 – 332 MH/s |
+| TESS (16 models) | **1,321 MH/s** | 1,142 – 1,482 MH/s |
+| **Average over time** | **≈ 420 MH/s** | |
 
 NEB blocks alternate between two models, Kepler and TESS, so the hashrate changes at every block. TESS blocks are found
 much faster than Kepler blocks (23 s against 97 s on average over the last 1,000 blocks of the chain), so a rig spends
-about 81 % of its time on Kepler blocks: weighted by time, the average is about 417 MH/s. The hashrate also changes
+about 81 % of its time on Kepler blocks: weighted by time, the average is about 420 MH/s. The hashrate also changes
 from one model to the next as the network trains them (the range above).
 
 These are the rates of the miner on a model it has fully prepared. Expect the pool's long-term average to be somewhat
