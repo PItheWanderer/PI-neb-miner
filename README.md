@@ -12,18 +12,21 @@ A fast GPU miner for **NEB** (Neural Engine Byte) on **AMD Radeon** graphics car
 
 ## Performance
 
-AMD Radeon RX 9070 XT, stock power limit, −50 mV undervolt, measured on 34 real NEB block models (heights 6384–6416
-and 7660–7681):
+AMD Radeon RX 9070 XT with the stock power limit (−50 mV), on 34 real NEB block models (heights 6384–6416 and
+7660–7681):
 
 | Block type | Average | Range |
 |---|---|---|
-| Kepler (18 models) | **209 MH/s** | 146 – 332 MH/s |
-| TESS (16 models) | **1,321 MH/s** | 1,142 – 1,482 MH/s |
-| **Average over time** | **≈ 420 MH/s** | |
+| Kepler (18 models) | **221 MH/s** | 153 – 360 MH/s |
+| TESS (16 models) | **1,469 MH/s** | 1,272 – 1,648 MH/s |
+| **Average over time** | **≈ 458 MH/s** | |
+
+Measured with the power limit 20 % below stock (Kepler 207 MH/s, TESS 1,373 MH/s, ≈ 428 MH/s over time) and scaled by
+the difference measured between the two settings on the same models (+6.6 % on Kepler, +7.0 % on TESS).
 
 NEB blocks alternate between two models, Kepler and TESS, so the hashrate changes at every block. TESS blocks are found
 much faster than Kepler blocks (23 s against 97 s on average over the last 1,000 blocks of the chain), so a rig spends
-about 81 % of its time on Kepler blocks: weighted by time, the average is about 420 MH/s. The hashrate also changes
+about 81 % of its time on Kepler blocks: weighted by time, the average is about 458 MH/s. The hashrate also changes
 from one model to the next as the network trains them (the range above).
 
 These are the rates of the miner on a model it has fully prepared. Expect the pool's long-term average to be somewhat
