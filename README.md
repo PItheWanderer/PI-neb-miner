@@ -100,9 +100,9 @@ New to mining? Follow these steps; it takes about ten minutes.
 5. **Choose a pool and put your address in its script.** Pick one of the pools above, right-click its script (for
    example `start-suprnova.bat`), choose **Edit** (or open it with Notepad), and replace the address after
    `set ADDRESS=` with **your** address. You can also change `rig1` to any name for this computer. Save and close.
-6. **Start mining.** Double-click the script. For about a minute the miner tests itself on your GPU; then the live
-   table appears. The first numbers to watch are the hashrate (MH/s) and the accepted shares (`A`): if `A` keeps going
-   up, you are mining.
+6. **Start mining.** Double-click the script. First the miner tests itself on your GPU for **30–45 seconds** (this
+   is normal, it is not stuck); then the live table appears. The first numbers to watch are the hashrate (MH/s) and the
+   accepted shares (`A`): if `A` keeps going up, you are mining.
 7. **Check your earnings.** Open the pool's website (see Pools) and look up your address.
 8. **Stop mining** with `q`, or by closing the window.
 
@@ -118,6 +118,8 @@ New to mining? Follow these steps; it takes about ten minutes.
    nano start-suprnova.sh   # put YOUR neb1... address in ADDRESS, save with Ctrl+O, quit with Ctrl+X
    ./start-suprnova.sh
    ```
+
+   The miner tests itself on your GPU for **30–45 seconds** before the live table appears.
 
    Replace `suprnova` with `innovlab`, `k1pool`, `aethelblock` or `cryopool` to mine on another pool.
 3. Check your earnings on the pool's website.
@@ -161,6 +163,8 @@ again.
 
 ## Troubleshooting
 
+- **Nothing happens for the first 30–45 seconds.** That is normal: every time it starts, the miner tests itself on
+  your GPU before it begins to mine.
 - **The hashrate goes up and down.** That is normal: Kepler and TESS blocks alternate, and each model is different.
   Look at the average and at the pool's statistics.
 - **"amdhip64_7.dll was not found" (Windows).** Update the AMD driver.
